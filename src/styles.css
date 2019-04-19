@@ -1,4 +1,16 @@
 .App {
   font-family: sans-serif;
-  text-align: center;
+  text-align: left;
+}
+
+.Board > div {
+  margin-bottom: 8px;
+}
+
+.Board button {
+  margin-left: 8px;
+}
+
+.Board span {
+  font-weight: 700;
 }

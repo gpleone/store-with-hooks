@@ -1,24 +1,27 @@
-import { useReducer } from 'react';
-
+// import { useReducer } from 'react';
 import { types } from './actions';
+import { handleActions } from 'redux-actions';
 
 const initialState = {
-  projects: [{ id: 0, name: 'car' }]
+  projects: []
 };
 
-const reducer = (state, action) => {
-  console.log(action);
-  switch (action.type) {
-    case types.ADD_PROJECT:
-      return { ...state, projects: [...state.projects, action.payload] };
-    case types.REMOVE_PROJECT:
-      return {
-        ...state,
-        projects: state.projects.filter(p => p.id !== action.payload.id)
-      };
-    default:
-      return state;
-  }
-};
+const add = (state, action) => ({
+  ...state,
+  projects: [...state.projects, { id: Math.random(), name: action.payload }]
+});
+
+const remove = (state, action) => ({
+  ...state,
+  projects: state.projects.filter(p => p.id !== action.payload)
+});
+
+const reducer = handleActions(
+  {
+    [types.ADD_PROJECT]: add,
+    [types.REMOVE_PROJECT]: remove
+  },
+  initialState
+);
 
 export { reducer, initialState };
